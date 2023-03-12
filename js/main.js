@@ -36,23 +36,19 @@ function getWeather(){
 function get5daysWeather(){
     const apikey = '3af4b4ad773af5617d9f81ed2b9e54ab';
     const loc = locationElem.value;
-    let coordinates ;
     let url = `http://api.openweathermap.org/geo/1.0/direct?q=${loc}&appid=${apikey}`
     fetch(url).then(res=>res.json())
     .then(data=>{
-        console.log(coordinates = data);
+        url = `https://api.openweathermap.org/data/2.5/weather?lat=${data[0].lat}&lon=${data[0].lon}&appid=${apikey}`
+        console.log(url)
+        fetch(url).then(res => res.json)
+        .then(weath => {
+            console.log(weath);
+        }).catch(error=> console.log(error))
     })
     .catch(error => console.log(error))
-    
-    console.log(coordinates);
-    url = `http://api.openweathermap.org/data/2.5/forecast/daily?lat=17.36&lon=78.47&cnt=5&appid=${apikey}`
-
-    fetch(url).then(res => res.json)
-    .then(data => {
-        console.log(data);
-    }).catch(error=> console.log(error))
-
-
 
     locationElem.value = '';
 }
+
+ 
