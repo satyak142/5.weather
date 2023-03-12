@@ -5,7 +5,7 @@ const iconElem = document.querySelector('#icon');
 const tempElem = document.querySelector('#temp');
 const weatherElem = document.querySelector('#weather');
 
-document.querySelector('#getWeather').addEventListener('click',get5daysWeather);
+document.querySelector('#getWeather').addEventListener('click',getWeather);
 
 function getWeather(){
     
@@ -30,10 +30,13 @@ function getWeather(){
     locationElem.value = '';
 }
 
+
+// geting next five days weather from the api with fetch request
+
 function get5daysWeather(){
     const apikey = '3af4b4ad773af5617d9f81ed2b9e54ab';
     const loc = locationElem.value;
-    let coordinates =[] ;
+    let coordinates ;
     let url = `http://api.openweathermap.org/geo/1.0/direct?q=${loc}&appid=${apikey}`
     fetch(url).then(res=>res.json())
     .then(data=>{
@@ -42,7 +45,7 @@ function get5daysWeather(){
     .catch(error => console.log(error))
     
     console.log(coordinates);
-    url = `http://api.openweathermap.org/data/2.5/forecast/daily?lat=17.360589&lon=78.4740613&cnt=5&appid=${apikey}`
+    url = `http://api.openweathermap.org/data/2.5/forecast/daily?lat=17.36&lon=78.47&cnt=5&appid=${apikey}`
 
     fetch(url).then(res => res.json)
     .then(data => {
